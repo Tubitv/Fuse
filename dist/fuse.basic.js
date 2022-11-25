@@ -1,5 +1,5 @@
 /**
- * Fuse.js v6.6.2 - Lightweight fuzzy-search (http://fusejs.io)
+ * Fuse.js v6.6.2-beta.1 - Lightweight fuzzy-search (http://fusejs.io)
  *
  * Copyright (c) 2022 Kiro Risk (http://kiro.me)
  * All Rights Reserved. Apache Software License 2.0
@@ -197,7 +197,6 @@
       var totalWeight = 0;
       keys.forEach(function (key) {
         var obj = createKey(key);
-        totalWeight += obj.weight;
 
         _this._keys.push(obj);
 
@@ -1282,7 +1281,9 @@
       value: function search(query) {
         var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
             _ref$limit = _ref.limit,
-            limit = _ref$limit === void 0 ? -1 : _ref$limit;
+            limit = _ref$limit === void 0 ? -1 : _ref$limit,
+            _ref$keys = _ref.keys,
+            keys = _ref$keys === void 0 ? [] : _ref$keys;
 
         var _this$options = this.options,
             includeMatches = _this$options.includeMatches,
@@ -1290,7 +1291,7 @@
             shouldSort = _this$options.shouldSort,
             sortFn = _this$options.sortFn,
             ignoreFieldNorm = _this$options.ignoreFieldNorm;
-        var results = isString(query) ? isString(this._docs[0]) ? this._searchStringList(query) : this._searchObjectList(query) : this._searchLogical(query);
+        var results = isString(query) ? isString(this._docs[0]) ? this._searchStringList(query) : this._searchObjectList(query, keys) : this._searchLogical(query);
         computeScore(results, {
           ignoreFieldNorm: ignoreFieldNorm
         });
@@ -1354,7 +1355,7 @@
       }
     }, {
       key: "_searchObjectList",
-      value: function _searchObjectList(query) {
+      value: function _searchObjectList(query, searchKeys) {
         var _this2 = this;
 
         var searcher = createSearcher(query, this.options);
@@ -1374,6 +1375,7 @@
           var matches = []; // Iterate over every key (i.e, path), and fetch the value at that key
 
           keys.forEach(function (key, keyIndex) {
+            if (searchKeys.length > 0 && !searchKeys.includes(key.id)) return;
             matches.push.apply(matches, _toConsumableArray(_this2._findMatches({
               key: key,
               value: item[keyIndex],
@@ -1457,7 +1459,7 @@
     return Fuse;
   }();
 
-  Fuse$1.version = '6.6.2';
+  Fuse$1.version = '6.6.2-beta.1';
   Fuse$1.createIndex = createIndex;
   Fuse$1.parseIndex = parseIndex;
   Fuse$1.config = Config;

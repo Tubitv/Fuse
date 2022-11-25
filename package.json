@@ -1,5 +1,5 @@
 {
-  "name": "fuse.js",
+  "name": "@adrise/fuse.js",
   "author": {
     "name": "Kiro Risk",
     "email": "kirollos@gmail.com",
@@ -14,7 +14,7 @@
   "files": [
     "dist"
   ],
-  "version": "6.6.2",
+  "version": "6.6.2-beta.1",
   "description": "Lightweight fuzzy-search",
   "license": "Apache-2.0",
   "repository": {
