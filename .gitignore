@@ -9,10 +9,7 @@ node_modules/
 
 package-lock.json
 
-dist/*.d.ts
-dist/*.js
-dist/*.map
-docs/.vuepress/dist
+dist/
 RELEASE_NOTE*.md
 
 playground/

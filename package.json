@@ -43,8 +43,7 @@
   },
   "standard-version": {
     "scripts": {
-      "postbump": "yarn build && yarn lint && yarn test 2>/dev/null",
-      "precommit": "git add dist/*.js dist/*.ts"
+      "postbump": "yarn build && yarn lint && yarn test 2>/dev/null"
     }
   },
   "husky": {
