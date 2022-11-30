@@ -19,3 +19,17 @@ jobs:
       - name: Print release output
         if: ${{ steps.release.outputs.released == 'true' }}
         run: echo Release ID ${{ steps.release.outputs.release_id }}
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        if: ${{ steps.release.outputs.released == 'true' }}
+        with:
+          node-version: '14.x'
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@adrise'
+      - run: yarn --frozen-lockfile
+        if: ${{ steps.release.outputs.released == 'true' }}
+      - run: npm publish
+        if: ${{ steps.release.outputs.released == 'true' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
