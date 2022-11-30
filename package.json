@@ -14,7 +14,7 @@
   "files": [
     "dist"
   ],
-  "version": "6.6.2-beta.7",
+  "version": "6.6.2-beta.8",
   "description": "Lightweight fuzzy-search",
   "license": "Apache-2.0",
   "repository": {
