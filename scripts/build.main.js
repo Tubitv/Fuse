@@ -5,9 +5,12 @@ const terser = require('terser')
 const rollup = require('rollup')
 const configs = require('./configs')
 
-if (!fs.existsSync('dist')) {
-  fs.mkdirSync('dist')
+const DIST_DIR = 'dist'
+
+if (fs.existsSync(DIST_DIR)) {
+  fs.rmSync(DIST_DIR, { recursive: true })
 }
+fs.mkdirSync(DIST_DIR)
 
 build(Object.keys(configs).map((key) => configs[key]))
 
