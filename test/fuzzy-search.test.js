@@ -772,6 +772,48 @@ describe('Searching with findAllMatches', () => {
   })
 })
 
+describe('Searching with includeMatchScore', () => {
+  const customBookList = [
+    {
+      title: "Old Man's War fiction",
+      author: 'John X',
+      tags: ['war']
+    },
+    {
+      title: 'Right Ho Jeeves',
+      author: 'P.D. Mans',
+      tags: ['fiction', 'war']
+    },
+    {
+      title: 'The life of Jane',
+      author: 'John Smith',
+      tags: ['john', 'smith']
+    },
+    {
+      title: 'John Smith',
+      author: 'Steve Pearson',
+      tags: ['steve', 'pearson']
+    }
+  ]
+  let fuse
+
+  beforeEach(
+    () =>
+      (fuse = new Fuse(customBookList, {
+        keys: ['title', 'author'],
+        includeMatches: true,
+        includeMatchScore: true,
+        findAllMatches: true
+      }))
+  )
+
+  test('Each match in every result item should have a score property', () => {
+    const result = fuse.search('life')
+    expect(result[0].matches[0]).toHaveProperty('score')
+  })
+})
+
+
 describe('Searching with minCharLength', () => {
   const customList = ['t te tes test tes te t']
   let fuse
@@ -1067,7 +1109,7 @@ describe('Searching taking into account field length', () => {
   })
 })
 
-describe.only('Searching with custom keys', () => {
+describe('Searching with custom keys', () => {
   const customBookList = [
     {
       title: "Old Man's War",

@@ -1,17 +1,20 @@
 import Config from './config'
-import { transformMatches, transformScore } from '../transform'
+import { transformMatches, transformMatchScore, transformScore } from '../transform'
 
 export default function format(
   results,
   docs,
   {
     includeMatches = Config.includeMatches,
+    includeMatchScore = false,
     includeScore = Config.includeScore
   } = {}
 ) {
   const transformers = []
 
-  if (includeMatches) transformers.push(transformMatches)
+  if (includeMatches) {
+    transformers.push(includeMatchScore ? transformMatchScore : transformMatches)
+  }
   if (includeScore) transformers.push(transformScore)
 
   return results.map((result) => {

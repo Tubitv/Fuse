@@ -5,6 +5,8 @@ export const MatchOptions = {
   // set will include the indices of the matched characters.
   // These can consequently be used for highlighting purposes.
   includeMatches: false,
+  // When true, every match will include its score
+  includeMatchScore: false,
   // When `true`, the matching function will continue to the end of a search pattern even if
   // a perfect match has already been located in the string.
   findAllMatches: false,
@@ -16,7 +18,7 @@ export const BasicOptions = {
   // When `true`, the algorithm continues searching to the end of the input even if a perfect
   // match is found before the end of the same input.
   isCaseSensitive: false,
-  // When true, the matching function will continue to the end of a search pattern even if
+  // When true, each record in the result set will incude its match score
   includeScore: false,
   // List of properties that will be searched. This also supports nested properties.
   keys: [],
