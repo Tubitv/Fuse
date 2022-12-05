@@ -98,6 +98,6 @@
     "webpack-cli": "^4.9.1"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   }
 }
