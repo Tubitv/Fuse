@@ -77,6 +77,7 @@ export default class Fuse {
   search(query, { limit = -1, keys = [] } = {}) {
     const {
       includeMatches,
+      includeMatchScore,
       includeScore,
       shouldSort,
       sortFn,
@@ -101,7 +102,8 @@ export default class Fuse {
 
     return format(results, this._docs, {
       includeMatches,
-      includeScore
+      includeScore,
+      includeMatchScore
     })
   }
 
